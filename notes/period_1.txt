@@ -1,0 +1,22 @@
+Express
+
+Middleware
+  - res
+  - res
+  - next
+
+Khi tra ket qua response:
+  - text
+  - html => M(model) V(view) ejs C(control) => RSS application
+  - json => build API
+
+
+RSS vs RCS
+- RSS: render server side. Express: (Frontend Backend)
+- RCS: render client side. Frontend (json) <= API => Backend
+
+Mongodb
+- Database
+- Collection
+- document (record)
+- field
