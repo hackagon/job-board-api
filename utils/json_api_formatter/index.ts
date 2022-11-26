@@ -5,14 +5,15 @@ import { IGeneral } from '../../models/interface'
 
 export const formatResource = (result: IGeneral): IJsonApiReource => {
   return {
-    type: _.get(result, "constructor.modelName", ""),
+    type: _.get(result, "constructor.modelName", "Custom"),
     _id: result._id,
     // lodash => _.chain
-    attributes: _.chain(result)
-      .get("_doc", {})
-      .omit(['_id', 'createdAt', 'updatedAt', 'password'])
-      .value()
-    ,
+    // attributes: _.chain(result)
+    //   .get("_doc", {})
+    //   .omit(['_id', 'createdAt', 'updatedAt', 'password'])
+    //   .value()
+    // ,
+    attributes: _.omit(result.toObject(), ['_id', 'createdAt', 'updatedAt', 'password']),
     relationships: {},
     meta: {
       createdAt: result.createdAt,

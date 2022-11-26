@@ -40,3 +40,4 @@ exports.UserSchema = new mongoose_1.default.Schema({
 const UserModel = mongoose_1.default.model('User', exports.UserSchema, 'User');
 UserModel.createIndexes();
 exports.default = UserModel;
+//# sourceMappingURL=user.model.js.map

@@ -22,15 +22,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -44,20 +35,20 @@ const userRouter = express_1.default.Router();
 /**
  * @todo Get list of users
  */
-userRouter.get('/users', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield UserService.findMany();
+userRouter.get('/users', async (req, res, next) => {
+    const users = await UserService.findMany();
     lodash_1.default.set(req, 'result', users);
     next();
-}), json_api_formatter_1.formatJsonApiCollection);
+}, json_api_formatter_1.formatJsonApiCollection);
 /**
  * @todo Create user
  */
-userRouter.post('/users', UserValidation.validateCreateUser, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+userRouter.post('/users', UserValidation.validateCreateUser, async (req, res, next) => {
     const data = req.body;
-    const result = yield UserService.create(data);
+    const result = await UserService.create(data);
     lodash_1.default.set(req, 'result', result);
     next();
-}), json_api_formatter_1.formatJsonApiResource);
+}, json_api_formatter_1.formatJsonApiResource);
 /**
  * @todo Update user
  */
@@ -71,3 +62,4 @@ userRouter.post('/users', UserValidation.validateCreateUser, (req, res, next) =>
  * @todo Get user by id
  */
 exports.default = userRouter;
+//# sourceMappingURL=user.route.js.map

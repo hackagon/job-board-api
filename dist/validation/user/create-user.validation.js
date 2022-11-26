@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -16,7 +7,7 @@ exports.validateCreateUser = void 0;
 const validator_1 = __importDefault(require("validator"));
 const lodash_1 = __importDefault(require("lodash"));
 const user_model_1 = __importDefault(require("../../models/user.model"));
-const validateCreateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const validateCreateUser = async (req, res, next) => {
     const errors = {};
     const { email, firstName, lastName } = req.body;
     // validate email: required, unique
@@ -30,7 +21,7 @@ const validateCreateUser = (req, res, next) => __awaiter(void 0, void 0, void 0,
         errors.email = "Email is invalid";
     }
     else {
-        const foundUser = yield user_model_1.default.findOne({ email });
+        const foundUser = await user_model_1.default.findOne({ email });
         if (foundUser)
             errors.email = "Email is already existed";
     }
@@ -56,5 +47,6 @@ const validateCreateUser = (req, res, next) => __awaiter(void 0, void 0, void 0,
         message: "Bad request",
         errors
     });
-});
+};
 exports.validateCreateUser = validateCreateUser;
+//# sourceMappingURL=create-user.validation.js.map

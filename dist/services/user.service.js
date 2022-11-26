@@ -25,3 +25,4 @@ const findMany = () => {
     return user_model_1.default.find();
 };
 exports.findMany = findMany;
+//# sourceMappingURL=user.service.js.map

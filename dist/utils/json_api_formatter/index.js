@@ -10,10 +10,12 @@ const formatResource = (result) => {
         type: lodash_1.default.get(result, "constructor.modelName", ""),
         _id: result._id,
         // lodash => _.chain
-        attributes: lodash_1.default.chain(result)
-            .get("_doc", {})
-            .omit(['_id', 'createdAt', 'updatedAt', 'password'])
-            .value(),
+        // attributes: _.chain(result)
+        //   .get("_doc", {})
+        //   .omit(['_id', 'createdAt', 'updatedAt', 'password'])
+        //   .value()
+        // ,
+        attributes: lodash_1.default.omit(result.toObject(), ['_id', 'createdAt', 'updatedAt', 'password']),
         relationships: {},
         meta: {
             createdAt: result.createdAt,
@@ -53,3 +55,4 @@ const formatJsonApiCollection = (req, res, next) => {
     return res.json(responsedData);
 };
 exports.formatJsonApiCollection = formatJsonApiCollection;
+//# sourceMappingURL=index.js.map

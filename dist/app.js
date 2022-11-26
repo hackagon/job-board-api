@@ -28,3 +28,4 @@ app.listen({ port }, () => {
     })
         .catch(console.log);
 });
+//# sourceMappingURL=app.js.map
