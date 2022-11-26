@@ -2,7 +2,7 @@ import express from 'express';
 import * as UserValidation from '../validation/user';
 import * as UserService from '../services/user.service'
 import _ from 'lodash'
-import { formatJsonApiResource } from '../utils/json_api_formatter';
+import { formatJsonApiResource, formatJsonApiCollection } from '../utils/json_api_formatter';
 
 const userRouter = express.Router();
 
@@ -13,10 +13,11 @@ userRouter.get(
   '/users',
   async (req, res, next) => {
     const users = await UserService.findMany();
-    return res.json({
-      data: users
-    })
-  })
+    _.set(req, 'result', users)
+    next();
+  },
+  formatJsonApiCollection
+)
 
 /**
  * @todo Create user
