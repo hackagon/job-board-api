@@ -9,7 +9,11 @@ const formatResource = (result) => {
     return {
         type: lodash_1.default.get(result, "constructor.modelName", ""),
         _id: result._id,
-        attributes: lodash_1.default.omit(result, ['_id', 'createdAt', 'updatedAt']),
+        // lodash => _.chain
+        attributes: lodash_1.default.chain(result)
+            .get("_doc", {})
+            .omit(['_id', 'createdAt', 'updatedAt', 'password'])
+            .value(),
         relationships: {},
         meta: {
             createdAt: result.createdAt,

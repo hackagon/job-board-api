@@ -7,6 +7,7 @@ import { IGeneral } from './interface';
  */
 export interface IUser extends IGeneral {
   email: String;
+  password: String;
   firstName: String;
   lastName: String;
   dob: Date;
@@ -18,6 +19,10 @@ export const UserSchema = new mongoose.Schema<IUser>({
     required: true,
     index: true,
     unique: true
+  },
+  password: {
+    type: String,
+    required: true,
   },
   firstName: {
     type: String,

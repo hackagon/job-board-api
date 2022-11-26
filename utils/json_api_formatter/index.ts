@@ -7,7 +7,12 @@ export const formatResource = (result: IGeneral): IJsonApiReource => {
   return {
     type: _.get(result, "constructor.modelName", ""),
     _id: result._id,
-    attributes: _.omit(result, ['_id', 'createdAt', 'updatedAt']),
+    // lodash => _.chain
+    attributes: _.chain(result)
+      .get("_doc", {})
+      .omit(['_id', 'createdAt', 'updatedAt', 'password'])
+      .value()
+    ,
     relationships: {},
     meta: {
       createdAt: result.createdAt,

@@ -34,6 +34,7 @@ const validateCreateUser = (req, res, next) => __awaiter(void 0, void 0, void 0,
         if (foundUser)
             errors.email = "Email is already existed";
     }
+    // validate password (password & confirm password)
     // validate firstName
     if (!firstName) {
         errors.firstName = "First name is required";

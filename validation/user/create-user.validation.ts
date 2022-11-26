@@ -25,6 +25,8 @@ export const validateCreateUser = async (req: Request, res: Response, next: Next
     if (foundUser) errors.email = "Email is already existed"
   }
 
+  // validate password (password & confirm password)
+
   // validate firstName
   if (!firstName) {
     errors.firstName = "First name is required"
