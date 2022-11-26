@@ -1,22 +1,44 @@
-import UserModel from "../models/user.model";
+import UserModel, { IUser } from "../models/user.model";
 import bcrypt from 'bcryptjs';
+import mongoose from "mongoose";
 
-export const create = (data: any) => {
-  const { password } = data;
+export const create = async (data: any): Promise<IUser> => {
+  return UserModel.create(data);
+}
 
-  return bcrypt.genSalt(10)
-    .then(salt => {
-      return bcrypt.hash(password, salt)
+export const findMany = () => {
+  return UserModel.find();
+}
+
+export const updatePassword = (data: any): Promise<IUser> => {
+  const { userId, oldPassword, newPassword } = data;
+  return UserModel.findOne(new mongoose.Types.ObjectId(userId))
+    .then(user => {
+      // check if user exist
+      if (!user) return Promise.reject({
+        message: 'User not found'
+      })
+
+      // check oldPassword
+      return Promise.all([
+        user,
+        bcrypt.compare(oldPassword, user.toObject().password)
+      ])
+      // update newPassword
     })
-    .then(hash => {
-      data.password = hash;
-      return UserModel.create(data);
+    .then(([user, isMatched]) => {
+      if (!isMatched) return Promise.reject({
+        message: "Old password is not matched"
+      })
+
+      user.password = newPassword;
+      return user.save();
     })
     .catch(err => {
       throw err;
     })
 }
 
-export const findMany = () => {
-  return UserModel.find();
+export const updateById = () => {
+
 }

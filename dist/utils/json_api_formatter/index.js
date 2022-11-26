@@ -7,7 +7,7 @@ exports.formatJsonApiCollection = exports.formatJsonApiResource = exports.format
 const lodash_1 = __importDefault(require("lodash"));
 const formatResource = (result) => {
     return {
-        type: lodash_1.default.get(result, "constructor.modelName", ""),
+        type: lodash_1.default.get(result, "constructor.modelName", "Custom"),
         _id: result._id,
         // lodash => _.chain
         // attributes: _.chain(result)

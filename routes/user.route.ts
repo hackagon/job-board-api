@@ -36,6 +36,23 @@ userRouter.post(
 )
 
 /**
+ * @todo update password
+ */
+userRouter.patch(
+  '/users/:userId/update-password',
+  // validator,
+  async (req, res, next) => {
+    const data = req.body; // oldPassword, newPassword, newPassword2
+    data.userId = req.params.userId;
+    const result = await UserService.updatePassword(data)
+
+    _.set(req, 'result', result)
+    next();
+  },
+  formatJsonApiResource
+)
+
+/**
  * @todo Update user
  */
 

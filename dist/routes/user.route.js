@@ -50,6 +50,18 @@ userRouter.post('/users', UserValidation.validateCreateUser, async (req, res, ne
     next();
 }, json_api_formatter_1.formatJsonApiResource);
 /**
+ * @todo update password
+ */
+userRouter.patch('/users/:userId/update-password', 
+// validator,
+async (req, res, next) => {
+    const data = req.body; // oldPassword, newPassword, newPassword2
+    data.userId = req.params.userId;
+    const result = await UserService.updatePassword(data);
+    lodash_1.default.set(req, 'result', result);
+    next();
+}, json_api_formatter_1.formatJsonApiResource);
+/**
  * @todo Update user
  */
 /**
