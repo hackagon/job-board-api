@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import userRouter from './routes/user.route'
+import verificationRouter from './routes/verification.route';
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.get("/", (req, res) => {
 })
 
 app.use('/api', userRouter);
+app.use('/api', verificationRouter)
 
 
 const port = process.env.PORT || 4000

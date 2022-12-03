@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const user_route_1 = __importDefault(require("./routes/user.route"));
+const verification_route_1 = __importDefault(require("./routes/verification.route"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 // middleware (req, res, next)
@@ -13,6 +14,7 @@ app.get("/", (req, res) => {
     res.send("<p style='color:red'>Hello World</p>");
 });
 app.use('/api', user_route_1.default);
+app.use('/api', verification_route_1.default);
 const port = process.env.PORT || 4000;
 app.listen({ port }, () => {
     mongoose_1.default.connect("mongodb://localhost:27017/job_board", {

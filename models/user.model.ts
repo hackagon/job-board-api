@@ -6,10 +6,10 @@ import bcrypt from 'bcryptjs';
  * @todo validate email (email valid, email unique)
  */
 export interface IUser extends IGeneral {
-  email: String;
-  password: String;
-  firstName: String;
-  lastName: String;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
   dob: Date;
 }
 
