@@ -2,6 +2,20 @@ import UserModel, { IUser } from "../models/user.model";
 import bcrypt from 'bcryptjs';
 import mongoose from "mongoose";
 
+export const findByEmail = (email: string) => {
+  return UserModel.findOne({ email })
+    .then(user => {
+      if (user) return user;
+      if (!user) Promise.reject({
+        status: 404,
+        message: 'User not found'
+      })
+    })
+    .catch(err => {
+      throw err;
+    })
+}
+
 export const create = async (data: any): Promise<IUser> => {
   return UserModel.create(data);
 }

@@ -3,10 +3,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateById = exports.updatePassword = exports.findMany = exports.create = void 0;
+exports.updateById = exports.updatePassword = exports.findMany = exports.create = exports.findByEmail = void 0;
 const user_model_1 = __importDefault(require("../models/user.model"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const findByEmail = (email) => {
+    return user_model_1.default.findOne({ email })
+        .then(user => {
+        if (user)
+            return user;
+        if (!user)
+            Promise.reject({
+                status: 404,
+                message: 'User not found'
+            });
+    })
+        .catch(err => {
+        throw err;
+    });
+};
+exports.findByEmail = findByEmail;
 const create = async (data) => {
     return user_model_1.default.create(data);
 };

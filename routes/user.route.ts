@@ -3,6 +3,7 @@ import * as UserValidation from '../validation/user';
 import * as UserService from '../services/user.service'
 import _ from 'lodash'
 import { formatJsonApiResource, formatJsonApiCollection } from '../utils/json_api_formatter';
+import passport from 'passport';
 
 const userRouter = express.Router();
 
@@ -11,6 +12,7 @@ const userRouter = express.Router();
  */
 userRouter.get(
   '/users',
+  passport.authenticate('jwt', { session: true }),
   async (req, res, next) => {
     const users = await UserService.findMany();
     _.set(req, 'result', users)
@@ -20,7 +22,7 @@ userRouter.get(
 )
 
 /**
- * @todo Create user
+ * @todo Create user/register
  */
 userRouter.post(
   '/users',
@@ -35,22 +37,7 @@ userRouter.post(
   formatJsonApiResource
 )
 
-/**
- * @todo update password
- */
-userRouter.patch(
-  '/users/:userId/update-password',
-  // validator,
-  async (req, res, next) => {
-    const data = req.body; // oldPassword, newPassword, newPassword2
-    data.userId = req.params.userId;
-    const result = await UserService.updatePassword(data)
 
-    _.set(req, 'result', result)
-    next();
-  },
-  formatJsonApiResource
-)
 
 /**
  * @todo Update user

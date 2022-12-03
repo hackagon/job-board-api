@@ -31,33 +31,22 @@ const UserValidation = __importStar(require("../validation/user"));
 const UserService = __importStar(require("../services/user.service"));
 const lodash_1 = __importDefault(require("lodash"));
 const json_api_formatter_1 = require("../utils/json_api_formatter");
+const passport_1 = __importDefault(require("passport"));
 const userRouter = express_1.default.Router();
 /**
  * @todo Get list of users
  */
-userRouter.get('/users', async (req, res, next) => {
+userRouter.get('/users', passport_1.default.authenticate('jwt', { session: true }), async (req, res, next) => {
     const users = await UserService.findMany();
     lodash_1.default.set(req, 'result', users);
     next();
 }, json_api_formatter_1.formatJsonApiCollection);
 /**
- * @todo Create user
+ * @todo Create user/register
  */
 userRouter.post('/users', UserValidation.validateCreateUser, async (req, res, next) => {
     const data = req.body;
     const result = await UserService.create(data);
-    lodash_1.default.set(req, 'result', result);
-    next();
-}, json_api_formatter_1.formatJsonApiResource);
-/**
- * @todo update password
- */
-userRouter.patch('/users/:userId/update-password', 
-// validator,
-async (req, res, next) => {
-    const data = req.body; // oldPassword, newPassword, newPassword2
-    data.userId = req.params.userId;
-    const result = await UserService.updatePassword(data);
     lodash_1.default.set(req, 'result', result);
     next();
 }, json_api_formatter_1.formatJsonApiResource);
