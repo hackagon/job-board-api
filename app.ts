@@ -8,6 +8,7 @@ import { applyPassport } from './middlewares/passport.middleware';
 import userRouter from './routes/user.route'
 import verificationRouter from './routes/verification.route';
 import meRouter from './routes/me.route';
+import companyRouter from './routes/company.route';
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.get("/", (req, res) => {
 app.use('/api', userRouter);
 app.use('/api', verificationRouter)
 app.use('/api', meRouter)
+app.use('/api/companies', companyRouter)
 
 
 const port = process.env.PORT || 4000

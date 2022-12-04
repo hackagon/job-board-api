@@ -10,7 +10,7 @@ export const authorize = (userTypeArray: Array<EUserType>) => {
   return (req: Request, res: Response, next: NextFunction) => {
     const userType = _.get(req, 'user.userType');
 
-    if (_.includes(userTypeArray, userType)) next();
+    if (_.includes(userTypeArray, userType)) return next();
     return res.status(403).json({ message: 'You do not have permission(s)' })
   }
 }

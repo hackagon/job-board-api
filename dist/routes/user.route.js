@@ -31,12 +31,14 @@ const UserValidation = __importStar(require("../validation/user"));
 const UserService = __importStar(require("../services/user.service"));
 const lodash_1 = __importDefault(require("lodash"));
 const json_api_formatter_1 = require("../utils/json_api_formatter");
-const passport_1 = __importDefault(require("passport"));
+const authentication_middleware_1 = require("../middlewares/authentication.middleware");
 const userRouter = express_1.default.Router();
 /**
  * @todo Get list of users
  */
-userRouter.get('/users', passport_1.default.authenticate('jwt', { session: true }), async (req, res, next) => {
+userRouter.get('/users', authentication_middleware_1.authenticate, 
+// passport.authenticate('jwt', { session: true }),
+async (req, res, next) => {
     const users = await UserService.findMany();
     lodash_1.default.set(req, 'result', users);
     next();

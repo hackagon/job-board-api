@@ -26,7 +26,8 @@ meRouter.get(
  */
 meRouter.patch(
   '/me/update-password',
-  passport.authenticate('jwt', { session: true }),
+  authenticate,
+  // passport.authenticate('jwt', { session: true }),
   async (req, res, next) => {
     const data = req.body; // oldPassword, newPassword, newPassword2
     data.userId = _.get(req, "user._id");

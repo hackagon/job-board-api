@@ -3,7 +3,7 @@ import * as UserValidation from '../validation/user';
 import * as UserService from '../services/user.service'
 import _ from 'lodash'
 import { formatJsonApiResource, formatJsonApiCollection } from '../utils/json_api_formatter';
-import passport from 'passport';
+import { authenticate } from '../middlewares/authentication.middleware';
 
 const userRouter = express.Router();
 
@@ -12,7 +12,8 @@ const userRouter = express.Router();
  */
 userRouter.get(
   '/users',
-  passport.authenticate('jwt', { session: true }),
+  authenticate,
+  // passport.authenticate('jwt', { session: true }),
   async (req, res, next) => {
     const users = await UserService.findMany();
     _.set(req, 'result', users)
