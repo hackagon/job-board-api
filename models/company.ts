@@ -9,6 +9,7 @@ export interface ICompany extends IGeneral {
   description: string;
   address: string;
   creatorId: mongoose.Types.ObjectId;
+  isActive: Boolean
 }
 
 export const CompanySchema = new mongoose.Schema<ICompany>({
@@ -25,6 +26,10 @@ export const CompanySchema = new mongoose.Schema<ICompany>({
   creatorId: {
     type: mongoose.Schema.Types.ObjectId,
     require: true
+  },
+  isActive: {
+    type: Boolean,
+    default: true
   }
 }, {
   timestamps: {
