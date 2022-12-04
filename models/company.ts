@@ -6,6 +6,7 @@ import { IGeneral } from './interface';
  */
 export interface ICompany extends IGeneral {
   name: string;
+  logoUrl: string;
   description: string;
   address: string;
   creatorId: mongoose.Types.ObjectId;
@@ -16,6 +17,9 @@ export const CompanySchema = new mongoose.Schema<ICompany>({
   name: {
     type: String,
     require: true
+  },
+  logoUrl: {
+    type: String,
   },
   description: {
     type: String,
@@ -30,7 +34,7 @@ export const CompanySchema = new mongoose.Schema<ICompany>({
   isActive: {
     type: Boolean,
     default: true
-  }
+  },
 }, {
   timestamps: {
     createdAt: 'createdAt',

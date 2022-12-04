@@ -36,4 +36,16 @@ companyRouter.post(
   formatJsonApiResource
 )
 
+/**
+ * @todo get company detail
+ */
+
+/**
+ * @todo update company
+ */
+
+/**
+ * @todo delete company
+ */
+
 export default companyRouter;
