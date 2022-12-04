@@ -10,3 +10,8 @@ export interface IJwtPayload {
   iat: Date
   exp: Date
 }
+
+export enum EUserType {
+  candidate = 'candidate',
+  recruiter = 'recruiter'
+}

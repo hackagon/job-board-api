@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { IGeneral } from './interface';
 import bcrypt from 'bcryptjs';
+import { EUserType } from '../interfaces';
 
 /**
  * @todo validate email (email valid, email unique)
@@ -11,6 +12,7 @@ export interface IUser extends IGeneral {
   firstName: string;
   lastName: string;
   dob: Date;
+  userType: EUserType;
 }
 
 export const UserSchema = new mongoose.Schema<IUser>({
@@ -39,6 +41,10 @@ export const UserSchema = new mongoose.Schema<IUser>({
   dob: {
     type: Date,
   },
+  userType: {
+    type: String,
+    required: true,
+  }
 }, {
   timestamps: {
     createdAt: 'createdAt',

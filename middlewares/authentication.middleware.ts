@@ -14,11 +14,15 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
 
   if (!jwt) return res.status(401).json({ message: "Token is missing" })
 
-  const result = jsonwebtoken.verify(jwt, 'mk98mb2RAZn^78tV!bok');
+  try {
+    const result = jsonwebtoken.verify(jwt, 'mk98mb2RAZn^78tV!bok');
 
-  const user = await UserService.findByEmail(_.get(result, "email"))
+    const user = await UserService.findByEmail(_.get(result, "email"))
 
-  _.set(req, 'user', user)
+    _.set(req, 'user', user)
 
-  next()
+    next()
+  } catch (error) {
+    res.status(401).json({ message: "Token is invalid" })
+  }
 }

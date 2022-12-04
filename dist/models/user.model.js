@@ -32,6 +32,10 @@ exports.UserSchema = new mongoose_1.default.Schema({
     dob: {
         type: Date,
     },
+    userType: {
+        type: String,
+        required: true,
+    }
 }, {
     timestamps: {
         createdAt: 'createdAt',
