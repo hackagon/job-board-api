@@ -3,6 +3,7 @@ import * as UserService from '../services/user.service'
 import _ from 'lodash'
 import { formatJsonApiResource } from '../utils/json_api_formatter';
 import passport from 'passport';
+import { authenticate } from '../middlewares/authentication.middleware';
 
 const meRouter = express.Router();
 
@@ -11,7 +12,8 @@ const meRouter = express.Router();
  */
 meRouter.get(
   '/me',
-  passport.authenticate('jwt', { session: true }),
+  authenticate,
+  // passport.authenticate('jwt', { session: true }),
   (req, res, next) => {
     _.set(req, 'result', req.user)
     next()

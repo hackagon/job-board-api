@@ -1,10 +1,6 @@
 import express from 'express';
 import _ from 'lodash'
-import UserModel from '../models/user.model';
-import { formatJsonApiResource, formatJsonApiCollection } from '../utils/json_api_formatter';
-import bcrypt from 'bcryptjs';
-import jsonwebtoken from 'jsonwebtoken'
-import VerificationModel from '../models/verification.model';
+import { formatJsonApiResource } from '../utils/json_api_formatter';
 import * as VerificationService from '../services/verification.service'
 
 const verificationRouter = express.Router();
