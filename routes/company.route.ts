@@ -7,6 +7,7 @@ import * as CompanyService from '../services/company.service'
 import { upload } from '../middlewares/upload.middleware'
 import { uploadFile } from '../adapters/cloudinary';
 import CompanyModel from '../models/company';
+import fs from 'fs'; // built-in nodejs
 
 const companyRouter = express.Router();
 
@@ -28,6 +29,7 @@ companyRouter.patch(
     const cloudinaryResponse = await uploadFile(filePath)
 
     // empty file
+    fs.unlinkSync(filePath)
 
     const company = await CompanyModel.findById(req.params.companyId)
     if (!company) return res.status(404).json({ mesasge: 'Company Not Found' })

@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import session from 'express-session';
 import { applyPassport } from './middlewares/passport.middleware';
+import path from 'path';
 
 // routers
 import userRouter from './routes/user.route'
@@ -12,11 +13,21 @@ import companyRouter from './routes/company.route';
 
 const app = express();
 
+/**
+ * @todo  serve static files/folders
+ */
+// app.use('/assets', express.static(path.join(__dirname, "..", "tmp/uploads")));
 
+
+/**
+ * @todo  handle data json in request
+ */
 app.use(express.json());
 
+/**
+ * @todo  handle authentication
+ */
 applyPassport(passport);
-
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -29,7 +40,9 @@ passport.serializeUser(function (user, done) {
 });
 
 
-// middleware (req, res, next)
+/**
+ * @todo  say hello
+ */
 app.get("/", (req, res) => {
   res.send("<p style='color:red'>Hello World</p>")
 })

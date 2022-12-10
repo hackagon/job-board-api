@@ -14,7 +14,17 @@ const verification_route_1 = __importDefault(require("./routes/verification.rout
 const me_route_1 = __importDefault(require("./routes/me.route"));
 const company_route_1 = __importDefault(require("./routes/company.route"));
 const app = (0, express_1.default)();
+/**
+ * @todo  serve static files/folders
+ */
+// app.use('/assets', express.static(path.join(__dirname, "..", "tmp/uploads")));
+/**
+ * @todo  handle data json in request
+ */
 app.use(express_1.default.json());
+/**
+ * @todo  handle authentication
+ */
 (0, passport_middleware_1.applyPassport)(passport_1.default);
 app.use((0, express_session_1.default)({
     secret: 'keyboard cat',
@@ -26,7 +36,9 @@ app.use(passport_1.default.initialize());
 passport_1.default.serializeUser(function (user, done) {
     done(null, user);
 });
-// middleware (req, res, next)
+/**
+ * @todo  say hello
+ */
 app.get("/", (req, res) => {
     res.send("<p style='color:red'>Hello World</p>");
 });
