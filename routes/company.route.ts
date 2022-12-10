@@ -4,9 +4,8 @@ import { formatJsonApiCollection, formatJsonApiResource } from '../utils/json_ap
 import * as MDW from '../middlewares';
 import { EUserType } from '../interfaces';
 import * as CompanyService from '../services/company.service'
-import { upload } from '../middlewares/upload.middleware'
 import { uploadFile } from '../adapters/cloudinary';
-import CompanyModel from '../models/company';
+import CompanyModel from '../models/company.model';
 import fs from 'fs'; // built-in nodejs
 
 const companyRouter = express.Router();
@@ -21,7 +20,7 @@ companyRouter.patch(
   MDW.authenticate,
   MDW.authorize([EUserType.recruiter]),
   // MDW.connection (verify recruiter <=> company)
-  upload.single('logo'),
+  MDW.upload.single('logo'),
   async (req, res, next) => {
     const filePath = req.file.path
 

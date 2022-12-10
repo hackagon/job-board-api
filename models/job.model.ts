@@ -13,6 +13,7 @@ export interface IJob extends IGeneral {
   description: string;
   requirement: string;
   benefit: string;
+  pdfUrl: string;
 }
 
 export const JobSchema = new mongoose.Schema<IJob>({
@@ -45,14 +46,15 @@ export const JobSchema = new mongoose.Schema<IJob>({
     type: String,
     required: true
   },
+  pdfUrl: {
+    type: String,
+  },
 }, {
   timestamps: {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
   }
 })
-
-
 
 const JobModel = mongoose.model<IJob>('Job', JobSchema, 'Job');
 

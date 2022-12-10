@@ -1,4 +1,4 @@
-import CompanyModel, { ICompany } from "../models/company";
+import CompanyModel, { ICompany } from "../models/company.model";
 
 
 export const create = async (data: any): Promise<ICompany> => {

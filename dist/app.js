@@ -13,6 +13,7 @@ const user_route_1 = __importDefault(require("./routes/user.route"));
 const verification_route_1 = __importDefault(require("./routes/verification.route"));
 const me_route_1 = __importDefault(require("./routes/me.route"));
 const company_route_1 = __importDefault(require("./routes/company.route"));
+const job_route_1 = __importDefault(require("./routes/job.route"));
 const app = (0, express_1.default)();
 /**
  * @todo  serve static files/folders
@@ -46,6 +47,7 @@ app.use('/api', user_route_1.default);
 app.use('/api', verification_route_1.default);
 app.use('/api', me_route_1.default);
 app.use('/api/companies', company_route_1.default);
+app.use('/api/jobs', job_route_1.default);
 const port = process.env.PORT || 4000;
 app.listen({ port }, () => {
     mongoose_1.default.connect("mongodb://localhost:27017/job_board", {
