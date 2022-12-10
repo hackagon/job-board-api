@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import { ELevel, EMode } from '../interfaces';
 import { IGeneral } from './interface';
 
@@ -6,6 +6,7 @@ import { IGeneral } from './interface';
  * @todo validate email (email valid, email unique)
  */
 export interface IJob extends IGeneral {
+  companyId: mongoose.Types.ObjectId,
   title: string;
   level: ELevel; // fresher, junior, senior, leader, director, c-level
   mode: EMode;
@@ -17,6 +18,11 @@ export interface IJob extends IGeneral {
 }
 
 export const JobSchema = new mongoose.Schema<IJob>({
+  companyId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Company'
+  },
   title: {
     type: String,
     required: true

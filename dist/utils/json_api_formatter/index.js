@@ -15,8 +15,8 @@ const formatResource = (result) => {
         //   .omit(['_id', 'createdAt', 'updatedAt', 'password'])
         //   .value()
         // ,
-        attributes: lodash_1.default.omit(result.toObject(), ['_id', 'createdAt', 'updatedAt', 'password']),
-        relationships: {},
+        attributes: lodash_1.default.omit(result.toObject(), ['_id', 'createdAt', 'updatedAt', 'password', 'relationships']),
+        relationships: lodash_1.default.get(result.toObject(), 'relationships'),
         meta: {
             createdAt: result.createdAt,
             updatedAt: result.updatedAt

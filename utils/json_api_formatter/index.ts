@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { IJsonApiCollection, IJsonApiReource } from './interface';
 import { IGeneral } from '../../models/interface'
 
-export const formatResource = (result: IGeneral): IJsonApiReource => {
+export const formatResource = (result: IGeneral | any): IJsonApiReource => {
   return {
     type: _.get(result, "constructor.modelName", "Custom"),
     _id: result._id,
@@ -13,8 +13,8 @@ export const formatResource = (result: IGeneral): IJsonApiReource => {
     //   .omit(['_id', 'createdAt', 'updatedAt', 'password'])
     //   .value()
     // ,
-    attributes: _.omit(result.toObject(), ['_id', 'createdAt', 'updatedAt', 'password']),
-    relationships: {},
+    attributes: _.omit(result.toObject(), ['_id', 'createdAt', 'updatedAt', 'password', 'relationships']),
+    relationships: _.get(result.toObject(), 'relationships'),
     meta: {
       createdAt: result.createdAt,
       updatedAt: result.updatedAt
