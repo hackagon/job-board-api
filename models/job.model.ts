@@ -7,6 +7,7 @@ import { IGeneral } from './interface';
  */
 export interface IJob extends IGeneral {
   companyId: mongoose.Types.ObjectId,
+  recruiterId: mongoose.Types.ObjectId,
   title: string;
   level: ELevel; // fresher, junior, senior, leader, director, c-level
   mode: EMode;
@@ -22,6 +23,11 @@ export const JobSchema = new mongoose.Schema<IJob>({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'Company'
+  },
+  recruiterId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Recruiter'
   },
   title: {
     type: String,

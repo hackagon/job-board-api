@@ -29,3 +29,9 @@ export enum EMode {
   remote = 'remote',
   hybrid = 'hybrid'
 }
+
+export enum EApplicationStatus {
+  active = 'active',
+  cancel = 'cancel',
+  pending = 'pending'
+}

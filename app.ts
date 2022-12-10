@@ -11,6 +11,7 @@ import verificationRouter from './routes/verification.route';
 import meRouter from './routes/me.route';
 import companyRouter from './routes/company.route';
 import jobRouter from './routes/job.route';
+import applicationRouter from './routes/application.route';
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use('/api', verificationRouter)
 app.use('/api', meRouter)
 app.use('/api/companies', companyRouter)
 app.use('/api/jobs', jobRouter)
+app.use('/api/applications', applicationRouter)
 
 
 const port = process.env.PORT || 4000
