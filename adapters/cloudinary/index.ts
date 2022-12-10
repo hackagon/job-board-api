@@ -7,8 +7,8 @@ cloudinary.v2.config({
   api_secret: '-wcraCxHllL2GIRuNxe1lxF8OEo'
 });
 
-// buffer
-export const uploadImage = async (path: string, buffer: Buffer) => {
+// upload buffer
+export const uploadBuffer = async (path: string, buffer: Buffer) => {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.v2.uploader.upload_stream({
       folder: path
@@ -22,4 +22,16 @@ export const uploadImage = async (path: string, buffer: Buffer) => {
 
     streamifier.createReadStream(buffer).pipe(uploadStream);
   })
+}
+
+// upload file via path
+export const uploadFile = async (filePath: string) => {
+  return cloudinary.v2.uploader
+    .upload(filePath,
+      {
+        // resource_type: "video",
+        // public_id: "test/logo",
+        // overwrite: true,
+        // notification_url: "https://mysite.example.com/notify_endpoint"
+      })
 }

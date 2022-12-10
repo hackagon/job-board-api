@@ -4,8 +4,41 @@ import { formatJsonApiCollection, formatJsonApiResource } from '../utils/json_ap
 import * as MDW from '../middlewares';
 import { EUserType } from '../interfaces';
 import * as CompanyService from '../services/company.service'
+import { upload } from '../middlewares/upload.middleware'
+import { uploadFile } from '../adapters/cloudinary';
+import CompanyModel from '../models/company';
 
 const companyRouter = express.Router();
+
+/**
+ * @todo  upload logo
+ * @notes company 1 <=> recruiter 1.1, 1.2
+ * @notes company 2 <=> recruiter 2.1, 2.2
+ */
+companyRouter.patch(
+  '/:companyId/_upload_',
+  MDW.authenticate,
+  MDW.authorize([EUserType.recruiter]),
+  // MDW.connection (verify recruiter <=> company)
+  upload.single('logo'),
+  async (req, res, next) => {
+    const filePath = req.file.path
+
+    // cloudinary
+    const cloudinaryResponse = await uploadFile(filePath)
+
+    // empty file
+
+    const company = await CompanyModel.findById(req.params.companyId)
+    if (!company) return res.status(404).json({ mesasge: 'Company Not Found' })
+    company.logoUrl = cloudinaryResponse.url;
+    await company.save()
+
+    _.set(req, 'result', company)
+    next();
+  },
+  formatJsonApiResource
+)
 
 companyRouter.get(
   '/',
@@ -43,6 +76,9 @@ companyRouter.post(
 /**
  * @todo update company
  */
+companyRouter.patch('/:companyId')
+
+
 
 /**
  * @todo delete company
