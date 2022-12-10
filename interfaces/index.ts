@@ -15,3 +15,17 @@ export enum EUserType {
   candidate = 'candidate',
   recruiter = 'recruiter'
 }
+
+export enum ELevel {
+  fresher = 'fresher',
+  junior = 'junior',
+  senior = 'senior',
+  leader = 'leader',
+  cLevel = 'cLevel'
+}
+
+export enum EMode {
+  onsite = 'onsite',
+  remote = 'remote',
+  hybrid = 'hybrid'
+}
