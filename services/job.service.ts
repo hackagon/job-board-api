@@ -8,8 +8,15 @@ export const create = async (data: any): Promise<IJob> => {
 }
 
 export const findMany = async (data: any): Promise<Array<IJob>> => {
-  const jobs = await JobModel.find({})
-    .populate('companyId')
+  const { companyId } = data
+  let jobs: Array<IJob>
+  if (data.companyId) {
+    jobs = await JobModel.find({ companyId })
+      .populate('companyId')
+  } else {
+    jobs = await JobModel.find()
+      .populate('companyId')
+  }
 
   return _.map(jobs, job => {
     if (!job.companyId) return job

@@ -6,7 +6,14 @@ export const create = async (data: any): Promise<IApplication> => {
 }
 
 export const findMany = async (data: any): Promise<Array<IApplication>> => {
-  return ApplicationModel.find({
+  const { jobId } = data
+
+  if (!jobId) return ApplicationModel.find({
     isActive: data.isActive
+  })
+
+  return ApplicationModel.find({
+    isActive: data.isActive,
+    jobId
   })
 }

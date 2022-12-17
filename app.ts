@@ -12,6 +12,7 @@ import meRouter from './routes/me.route';
 import companyRouter from './routes/company.route';
 import jobRouter from './routes/job.route';
 import applicationRouter from './routes/application.route';
+import analyticsRouter from './routes/analytics.route';
 
 const app = express();
 
@@ -55,6 +56,7 @@ app.use('/api', meRouter)
 app.use('/api/companies', companyRouter)
 app.use('/api/jobs', jobRouter)
 app.use('/api/applications', applicationRouter)
+app.use('/api/analytics', analyticsRouter)
 
 
 const port = process.env.PORT || 4000
