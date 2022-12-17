@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import CompanyModel, { ICompany } from "../models/company.model";
 
 
@@ -15,3 +16,7 @@ export const findMany = async (data: any): Promise<Array<ICompany>> => {
 //   const buffer = data;
 
 // }
+
+export const findById = async (_id: Types.ObjectId): Promise<ICompany> => {
+  return await CompanyModel.findById(_id);
+}

@@ -1,6 +1,7 @@
 import JobModel, { IJob } from "../models/job.model";
 import _ from 'lodash'
 import { formatResource } from "../utils/json_api_formatter";
+import { Types } from "mongoose";
 
 export const create = async (data: any): Promise<IJob> => {
   return JobModel.create(data);
@@ -17,6 +18,10 @@ export const findMany = async (data: any): Promise<Array<IJob>> => {
     _.set(job, '_doc.companyId', job.companyId._id)
     return job;
   })
+}
+
+export const findById = async (_id: Types.ObjectId): Promise<IJob> => {
+  return await JobModel.findById(_id);
 }
 
 // export const uploadPdf

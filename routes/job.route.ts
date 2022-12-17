@@ -28,8 +28,8 @@ jobRouter.post(
   MDW.authorize([EUserType.recruiter]),
   // MDW connection recruiter <=> company
   async (req, res, next) => {
-
     const data = req.body;
+    data.recruiterId = _.get(req, 'user._id')
     const job = await JobSevice.create(data);
 
     _.set(req, 'result', job)

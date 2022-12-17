@@ -1,6 +1,6 @@
 import UserModel, { IUser } from "../models/user.model";
 import bcrypt from 'bcryptjs';
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 export const findByEmail = (email: string) => {
   return UserModel.findOne({ email })
@@ -51,6 +51,10 @@ export const updatePassword = (data: any): Promise<IUser> => {
     .catch(err => {
       throw err;
     })
+}
+
+export const findById = async (_id: Types.ObjectId): Promise<IUser> => {
+  return await UserModel.findById(_id);
 }
 
 export const updateById = () => {

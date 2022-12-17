@@ -27,7 +27,7 @@ export const JobSchema = new mongoose.Schema<IJob>({
   recruiterId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'Recruiter'
+    ref: 'User'
   },
   title: {
     type: String,
