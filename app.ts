@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import session from 'express-session';
 import { applyPassport } from './middlewares/passport.middleware';
-import path from 'path';
+import config from './config'
 
 // routers
 import userRouter from './routes/user.route'
@@ -13,6 +13,7 @@ import companyRouter from './routes/company.route';
 import jobRouter from './routes/job.route';
 import applicationRouter from './routes/application.route';
 import analyticsRouter from './routes/analytics.route';
+
 
 const app = express();
 
@@ -58,16 +59,16 @@ app.use('/api/jobs', jobRouter)
 app.use('/api/applications', applicationRouter)
 app.use('/api/analytics', analyticsRouter)
 
-
-const port = process.env.PORT || 4000
+const port = config.PORT || 4000
 app.listen({ port }, () => {
-  mongoose.connect("mongodb://localhost:27017/job_board", {
+  mongoose.connect(config.MONGO_URI, {
     autoIndex: true,
 
   })
     .then(() => {
       console.log('App is running:')
       console.table({
+        NODE_ENV: config.NODE_ENV,
         port,
         dbType: "mongodb",
         dbHost: "localhost"

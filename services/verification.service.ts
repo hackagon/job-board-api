@@ -2,9 +2,10 @@ import VerificationModel, { IVerification } from "../models/verification.model";
 import jsonwebtoken from 'jsonwebtoken'
 import UserModel from "../models/user.model";
 import bcrypt from 'bcryptjs';
+import config from '../config'
 
 export const createJwt = (email: string) => {
-  return jsonwebtoken.sign({ email }, "mk98mb2RAZn^78tV!bok", {
+  return jsonwebtoken.sign({ email }, config.JWT_SECRET_KEY, {
     expiresIn: '1d'
   })
 }

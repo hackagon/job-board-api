@@ -8,6 +8,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const passport_1 = __importDefault(require("passport"));
 const express_session_1 = __importDefault(require("express-session"));
 const passport_middleware_1 = require("./middlewares/passport.middleware");
+const config_1 = __importDefault(require("./config"));
 // routers
 const user_route_1 = __importDefault(require("./routes/user.route"));
 const verification_route_1 = __importDefault(require("./routes/verification.route"));
@@ -52,14 +53,15 @@ app.use('/api/companies', company_route_1.default);
 app.use('/api/jobs', job_route_1.default);
 app.use('/api/applications', application_route_1.default);
 app.use('/api/analytics', analytics_route_1.default);
-const port = process.env.PORT || 4000;
+const port = config_1.default.PORT || 4000;
 app.listen({ port }, () => {
-    mongoose_1.default.connect("mongodb://localhost:27017/job_board", {
+    mongoose_1.default.connect(config_1.default.MONGO_URI, {
         autoIndex: true,
     })
         .then(() => {
         console.log('App is running:');
         console.table({
+            NODE_ENV: config_1.default.NODE_ENV,
             port,
             dbType: "mongodb",
             dbHost: "localhost"

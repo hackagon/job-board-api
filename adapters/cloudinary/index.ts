@@ -1,10 +1,11 @@
 import cloudinary from 'cloudinary'
 import streamifier from 'streamifier';
+import config from '../../config'
 
 cloudinary.v2.config({
-  cloud_name: 'dfkfifms8',
-  api_key: '588881372973594',
-  api_secret: '-wcraCxHllL2GIRuNxe1lxF8OEo'
+  cloud_name: config.CLD_NAME,
+  api_key: config.CLD_API_KEY,
+  api_secret: config.CLD_SECRET_KEY
 });
 
 // upload buffer
